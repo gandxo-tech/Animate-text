@@ -12,8 +12,8 @@ import {
   Check,
   Disc,
 } from 'lucide-react';
-import { StudioSettings, FontFamilyId, CursorStyle } from '../types';
-import { COLOR_THEMES } from '../data/copywritingBank';
+import { StudioSettings, FontFamilyId, CursorStyle, CopyTemplate } from '../types';
+import { COLOR_THEMES, COPY_TEMPLATES } from '../data/copywritingBank';
 import { ASPECT_RATIOS } from '../utils/canvasRenderer';
 import { CopyAnalysis } from '../utils/textFormatter';
 
@@ -25,6 +25,7 @@ interface ControlsPanelProps {
   onOpenWizard: () => void;
   onOpenTemplates: () => void;
   onOpenRules: () => void;
+  onSelectTemplate: (template: CopyTemplate) => void;
 }
 
 export function ControlsPanel({
@@ -35,6 +36,7 @@ export function ControlsPanel({
   onOpenWizard,
   onOpenTemplates,
   onOpenRules,
+  onSelectTemplate,
 }: ControlsPanelProps) {
   const fontOptions: { id: FontFamilyId; label: string; sub: string }[] = [
     { id: 'Plus Jakarta Sans', label: 'Plus Jakarta', sub: 'Moderne & Lisible' },
@@ -57,6 +59,9 @@ export function ControlsPanel({
     { id: 'underscore', label: 'Tiret (_)' },
     { id: 'glow', label: 'Lueur (●)' },
   ];
+
+  // Filtre les templates portfolio
+  const portfolioTemplates = COPY_TEMPLATES.filter(t => t.category === 'Portfolio & Créateurs');
 
   return (
     <div className="w-full h-full overflow-y-auto p-4 md:p-6 space-y-6 text-sm text-neutral-300">
@@ -115,6 +120,38 @@ export function ControlsPanel({
           >
             Score d’impact : {analysis.score}/100
           </button>
+        </div>
+
+        {/* Templates Portfolio Express (C'est compris, je vous présente mon portfolio...) */}
+        <div className="pt-2 border-t border-neutral-800/60">
+          <div className="flex items-center justify-between text-[11px] mb-1.5 text-neutral-400">
+            <span className="font-semibold text-[#e8c98d]">Accroches Portfolio & Présentation :</span>
+            <button
+              onClick={onOpenTemplates}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Voir tout ({portfolioTemplates.length})
+            </button>
+          </div>
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            {portfolioTemplates.map(tmpl => {
+              const isCurrent = settings.text === tmpl.hookText;
+              return (
+                <button
+                  key={tmpl.id}
+                  onClick={() => onSelectTemplate(tmpl)}
+                  title={tmpl.hookText}
+                  className={`px-2.5 py-1 rounded-lg text-xs whitespace-nowrap transition-all cursor-pointer border ${
+                    isCurrent
+                      ? 'bg-[#e8c98d] text-neutral-950 border-[#e8c98d] font-semibold shadow-sm'
+                      : 'bg-[#15151f] text-neutral-300 border-neutral-800 hover:border-neutral-700 hover:text-white'
+                  }`}
+                >
+                  {tmpl.eventName}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 

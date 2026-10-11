@@ -447,6 +447,7 @@ export default function App() {
             onOpenWizard={() => setIsWizardOpen(true)}
             onOpenTemplates={() => setIsTemplatesOpen(true)}
             onOpenRules={() => setIsRulesOpen(true)}
+            onSelectTemplate={handleApplyTemplate}
           />
         </section>
 
