@@ -1,0 +1,6 @@
+{
+  "name": "Gandxo Type Studio Pro",
+  "description": "Générateur vidéo de typographie cinétique et studio de copywriting événementiel pour TikTok, Reels et statuts WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
