@@ -152,10 +152,16 @@ export default function App() {
         progressRef.current = newRatio;
         setPlaybackProgress(newRatio);
 
-        // Sound trigger
+        // Sound trigger adapted to animation style
         if (settings.soundEnabled && lastCharCount <= totalChars) {
           const char = text[lastCharCount - 1] || '';
-          audioEngine.playClick(char === ' ' || char === '\n');
+          if (settings.animationStyle === 'glitch' && Math.random() < 0.35) {
+            audioEngine.playGlitch();
+          } else if (settings.animationStyle === 'zoom' && (char === ' ' || char === '\n')) {
+            audioEngine.playWhoosh();
+          } else {
+            audioEngine.playClick(char === ' ' || char === '\n');
+          }
         }
 
         renderCurrentState();
@@ -292,7 +298,13 @@ export default function App() {
 
         if (settings.soundEnabled && i > 0 && i <= totalChars) {
           const char = text[i - 1];
-          audioEngine.playClick(char === ' ' || char === '\n');
+          if (settings.animationStyle === 'glitch' && Math.random() < 0.35) {
+            audioEngine.playGlitch();
+          } else if (settings.animationStyle === 'zoom' && (char === ' ' || char === '\n')) {
+            audioEngine.playWhoosh();
+          } else {
+            audioEngine.playClick(char === ' ' || char === '\n');
+          }
         }
 
         setExportProgress((i / totalChars) * 85);

@@ -17,7 +17,7 @@ import {
   Info,
   Check,
 } from 'lucide-react';
-import { StudioSettings, FontFamilyId, CursorStyle, CopyTemplate } from '../types';
+import { StudioSettings, FontFamilyId, CursorStyle, CopyTemplate, AnimationStyle } from '../types';
 import { COLOR_THEMES, COPY_TEMPLATES } from '../data/copywritingBank';
 import { ASPECT_RATIOS } from '../utils/canvasRenderer';
 import { CopyAnalysis } from '../utils/textFormatter';
@@ -46,6 +46,15 @@ export function ControlsPanel({
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [copied, setCopied] = useState(false);
   const [activeCategoryFilter, setActiveCategoryFilter] = useState<'all' | 'portfolio' | 'ecommerce' | 'quotes'>('all');
+
+  const animationOptions: { id: AnimationStyle; label: string; sub: string; icon: string }[] = [
+    { id: 'typewriter', label: 'Typewriter', sub: 'Écriture progressive', icon: '⌨️' },
+    { id: 'glitch', label: 'Glitch', sub: 'Effet numérique cyber', icon: '⚡' },
+    { id: 'zoom', label: 'Zoom', sub: 'Texte qui s’approche', icon: '🔍' },
+    { id: 'wordByWord', label: 'Mot par mot', sub: 'Apparition successive', icon: '💬' },
+    { id: 'fade', label: 'Fade', sub: 'Apparition en douceur', icon: '🌫️' },
+    { id: 'terminal', label: 'Terminal', sub: 'Console développeur', icon: '💻' },
+  ];
 
   const fontOptions: { id: FontFamilyId; label: string; sub: string }[] = [
     { id: 'Plus Jakarta Sans', label: 'Plus Jakarta', sub: 'Moderne & Pro' },
@@ -218,11 +227,46 @@ export function ControlsPanel({
         </div>
       </div>
 
-      {/* 2. Format & Réseau Social */}
+      {/* 2. Style d’Animation */}
+      <div className="space-y-2 bg-[#0e0e14] p-3 sm:p-4 rounded-xl border border-neutral-800/80">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#e8c98d]" />
+            <span>2. Style d’Animation</span>
+          </label>
+          <span className="text-[11px] text-[#e8c98d] font-semibold">
+            {animationOptions.find(a => a.id === settings.animationStyle)?.label}
+          </span>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {animationOptions.map(anim => {
+            const isSelected = settings.animationStyle === anim.id;
+            return (
+              <button
+                key={anim.id}
+                onClick={() => onChange({ animationStyle: anim.id })}
+                className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                  isSelected
+                    ? 'border-[#e8c98d] bg-[#e8c98d]/10 text-white font-semibold shadow-sm'
+                    : 'border-neutral-800 bg-[#14141e] text-neutral-400 hover:text-neutral-200 hover:border-neutral-700'
+                }`}
+              >
+                <div className="text-xs font-bold flex items-center gap-1.5">
+                  <span className="text-sm">{anim.icon}</span>
+                  <span className="truncate">{anim.label}</span>
+                </div>
+                <div className="text-[10px] text-neutral-500 truncate mt-0.5">{anim.sub}</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 3. Format & Réseau Social */}
       <div className="space-y-2 bg-[#0e0e14] p-3 sm:p-4 rounded-xl border border-neutral-800/80">
         <label className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-1.5">
           <Layout className="w-3.5 h-3.5 text-[#e8c98d]" />
-          <span>2. Format & Réseaux Sociaux</span>
+          <span>3. Format & Réseaux Sociaux</span>
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {ASPECT_RATIOS.map(ratio => (
@@ -242,11 +286,11 @@ export function ControlsPanel({
         </div>
       </div>
 
-      {/* 3. Ambiance & Couleurs */}
+      {/* 4. Ambiance & Couleurs */}
       <div className="space-y-2 bg-[#0e0e14] p-3 sm:p-4 rounded-xl border border-neutral-800/80">
         <label className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-1.5">
           <Palette className="w-3.5 h-3.5 text-[#e8c98d]" />
-          <span>3. Palette de Couleurs</span>
+          <span>4. Palette de Couleurs</span>
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {COLOR_THEMES.map(theme => (
@@ -269,11 +313,11 @@ export function ControlsPanel({
         </div>
       </div>
 
-      {/* 4. Typographie & Taille */}
+      {/* 5. Typographie & Taille */}
       <div className="space-y-3 bg-[#0e0e14] p-3 sm:p-4 rounded-xl border border-neutral-800/80">
         <label className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-1.5">
           <Type className="w-3.5 h-3.5 text-[#e8c98d]" />
-          <span>4. Style de Police & Taille</span>
+          <span>5. Style de Police & Taille</span>
         </label>
 
         {/* Polices */}

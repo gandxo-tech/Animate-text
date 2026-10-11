@@ -8,7 +8,13 @@ export interface AspectRatioOption {
   height: number;
 }
 
-export type AnimationStyle = 'typewriter' | 'wordByWord' | 'lineFade';
+export type AnimationStyle =
+  | 'typewriter'
+  | 'glitch'
+  | 'zoom'
+  | 'wordByWord'
+  | 'fade'
+  | 'terminal';
 
 export type CursorStyle = 'bar' | 'block' | 'underscore' | 'glow';
 
