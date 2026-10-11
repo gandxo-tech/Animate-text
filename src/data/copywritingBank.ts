@@ -151,6 +151,64 @@ export const COPY_TEMPLATES: CopyTemplate[] = [
     ruleApplied: 'Règle 3 : Phrases directes et ton authentique',
   },
 
+  // --- SECTION CITATIONS & STATUTS RÉSEAUX ---
+  {
+    id: 'citation-discipline',
+    category: 'Citations & Motivation',
+    eventName: 'Motivation Quotidienne',
+    title: 'Discipline & Constance — Statut Viral',
+    hookText: 'Le succès ne vient pas de ce que vous faites de temps en temps. Il vient de ce que vous répétez chaque jour en silence.',
+    headerTag: 'PENSÉE DU JOUR · MINDSET',
+    footerSignature: 'PARTAGE SI TU VALIDES · @GANDXO',
+    suggestedTheme: 'white',
+    pricingExample: '',
+    localContext: 'Statuts WhatsApp & Stories Instagram',
+    ruleApplied: 'Règle 3 : Phrase courte, percutante et mémorable',
+  },
+  {
+    id: 'citation-action-directe',
+    category: 'Citations & Motivation',
+    eventName: 'Passage à l’Action',
+    title: 'Le Meilleur Moment, C’est Maintenant',
+    hookText: 'Dans 6 mois, vous regretterez de ne pas avoir commencé aujourd’hui. Arrêtez de douter, lancez votre projet.',
+    headerTag: 'RAPPEL IMPORTANT · ÉDITION LIMITÉE',
+    footerSignature: 'FAIS LE PREMIER PAS AUJOURD’HUI',
+    suggestedTheme: 'gold',
+    pricingExample: '',
+    localContext: 'Reels & TikTok Motivation',
+    ruleApplied: 'Règle 4 : Parler directement à la personne (« vous »)',
+  },
+
+  // --- SECTION RESTAURATION & COMMERCE DU QUOTIDIEN ---
+  {
+    id: 'resto-plat-du-jour',
+    category: 'Food & Restauration',
+    eventName: 'Plat du Jour Gourmand',
+    title: 'Menu Frais Livré Chaud à Midi',
+    hookText: 'Le vrai goût du fait-maison livré fumant à votre bureau avant 12h30. MoMo et cash acceptés, commandez sur WhatsApp !',
+    headerTag: 'MENU DU MIDI · FAIT MAISON',
+    footerSignature: 'LIVRAISON RAPIDE EN 30 MIN · COTONOU',
+    suggestedTheme: 'amber',
+    pricingExample: 'Dès 2 500 FCFA',
+    localContext: 'Cadjehoun, Haie Vive, Akpakpa',
+    ruleApplied: 'Règle 1 : Ce que ça change (« livré fumant à votre bureau »)',
+  },
+
+  // --- SECTION FORMATION & COACHING ---
+  {
+    id: 'formation-competences',
+    category: 'Formation & Coaching',
+    eventName: 'Booster ses Compétences',
+    title: 'Formation Pratique — Zéro Théorie Inutile',
+    hookText: 'Maîtrisez les outils numériques en 4 semaines chrono. 1 h par jour, exercices réels et mentorat direct sur WhatsApp.',
+    headerTag: 'SESSION INTENSIVE · PLACES LIMITÉES',
+    footerSignature: 'REJOINDRE LE GROUPE VIP · LIEN EN BIO',
+    suggestedTheme: 'blue',
+    pricingExample: '15 000 FCFA au lieu de 30 000 FCFA',
+    localContext: 'Accessible partout sur mobile',
+    ruleApplied: 'Règle 2 : Concret (4 semaines, 1 h par jour)',
+  },
+
   // --- SECTION ÉVÉNEMENTS E-COMMERCE & PROMOTIONS ---
   {
     id: 'reveillon-minuit-dore',

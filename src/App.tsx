@@ -381,8 +381,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#08080b] text-neutral-100 flex flex-col font-sans">
-      {/* Top Bar Contract (1 Brand wordmark, 3-4 nav links, 1 primary action) */}
+    <div className="h-[100dvh] bg-[#08080b] text-neutral-100 flex flex-col font-sans overflow-hidden">
+      {/* Top Bar Contract */}
       <StudioHeader
         onOpenWizard={() => setIsWizardOpen(true)}
         onOpenTemplates={() => setIsTemplatesOpen(true)}
@@ -393,9 +393,9 @@ export default function App() {
 
       {/* Notification Toast */}
       {notification && (
-        <div className="fixed top-20 right-6 z-50 animate-in slide-in-from-top-4 duration-200">
+        <div className="fixed top-16 sm:top-20 right-4 sm:right-6 z-50 animate-in slide-in-from-top-4 duration-200">
           <div
-            className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border text-xs font-medium shadow-xl backdrop-blur-md ${
+            className={`flex items-center gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl border text-xs font-medium shadow-xl backdrop-blur-md ${
               notification.type === 'success'
                 ? 'bg-neutral-900/90 border-[#e8c98d]/40 text-[#e8c98d]'
                 : 'bg-red-950/90 border-red-800 text-red-200'
@@ -411,31 +411,37 @@ export default function App() {
         </div>
       )}
 
-      {/* Mobile Sub-Navigation Tabs */}
-      <div className="md:hidden flex items-center justify-around border-b border-neutral-800 bg-[#0e0e13] px-4 py-2 text-xs">
-        <button
-          onClick={() => setMobileTab('preview')}
-          className={`px-4 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
-            mobileTab === 'preview' ? 'bg-[#e8c98d] text-neutral-950 font-bold' : 'text-neutral-400'
-          }`}
-        >
-          Aperçu Vidéo
-        </button>
-        <button
-          onClick={() => setMobileTab('controls')}
-          className={`px-4 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
-            mobileTab === 'controls' ? 'bg-[#e8c98d] text-neutral-950 font-bold' : 'text-neutral-400'
-          }`}
-        >
-          Réglages & Texte
-        </button>
+      {/* Mobile Segmented Navigation Tabs */}
+      <div className="md:hidden flex items-center justify-center border-b border-neutral-800 bg-[#0c0c12] p-1.5 shrink-0 z-10">
+        <div className="flex items-center bg-[#151520] p-1 rounded-xl w-full max-w-sm border border-neutral-800">
+          <button
+            onClick={() => setMobileTab('preview')}
+            className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+              mobileTab === 'preview'
+                ? 'bg-[#e8c98d] text-neutral-950 shadow-sm'
+                : 'text-neutral-400 hover:text-white'
+            }`}
+          >
+            <span>🎬 Aperçu Vidéo</span>
+          </button>
+          <button
+            onClick={() => setMobileTab('controls')}
+            className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+              mobileTab === 'controls'
+                ? 'bg-[#e8c98d] text-neutral-950 shadow-sm'
+                : 'text-neutral-400 hover:text-white'
+            }`}
+          >
+            <span>⚙️ Texte & Style</span>
+          </button>
+        </div>
       </div>
 
       {/* Main Studio Split Layout */}
-      <main className="flex-1 grid grid-cols-1 md:grid-cols-12 min-h-0 overflow-hidden">
+      <main className="flex-1 grid grid-cols-1 md:grid-cols-12 min-h-0 overflow-hidden relative">
         {/* Left Column: Studio Controls Panel */}
         <section
-          className={`md:col-span-6 lg:col-span-5 border-r border-neutral-800/80 bg-[#0c0c10] overflow-y-auto ${
+          className={`md:col-span-6 lg:col-span-5 border-r border-neutral-800/80 bg-[#0c0c10] overflow-y-auto h-full ${
             mobileTab === 'controls' ? 'block' : 'hidden md:block'
           }`}
         >
@@ -449,11 +455,21 @@ export default function App() {
             onOpenRules={() => setIsRulesOpen(true)}
             onSelectTemplate={handleApplyTemplate}
           />
+
+          {/* Mobile Bottom Quick Switch Button to return to Preview */}
+          <div className="p-4 md:hidden sticky bottom-0 bg-[#0c0c10]/95 backdrop-blur border-t border-neutral-800">
+            <button
+              onClick={() => setMobileTab('preview')}
+              className="w-full py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer border border-neutral-700 shadow-sm"
+            >
+              <span>Voir l’Aperçu Vidéo & Exporter 🎬</span>
+            </button>
+          </div>
         </section>
 
         {/* Right Column: Canvas Live Viewport */}
         <section
-          className={`md:col-span-6 lg:col-span-7 bg-[#060609] flex flex-col items-center justify-center relative overflow-hidden ${
+          className={`md:col-span-6 lg:col-span-7 bg-[#060609] flex flex-col items-center justify-center relative overflow-hidden h-full ${
             mobileTab === 'preview' ? 'flex' : 'hidden md:flex'
           }`}
         >
@@ -471,6 +487,7 @@ export default function App() {
             onToggleSound={() => handleUpdateSettings({ soundEnabled: !settings.soundEnabled })}
             onToggleSafeGuides={() => handleUpdateSettings({ safeGuidesVisible: !settings.safeGuidesVisible })}
             onTakeSnapshot={handleTakeSnapshot}
+            onExportVideo={handleExportVideo}
           />
         </section>
       </main>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Check, ArrowRight, Sparkles, RefreshCw } from 'lucide-react';
+import { X, Check, Sparkles } from 'lucide-react';
 import { StudioSettings } from '../types';
 
 interface CopywritingWizardModalProps {
@@ -35,8 +35,16 @@ export function CopywritingWizardModal({
     onClose();
   };
 
-  const handleLoadSample = (sampleType: 'cotonou' | 'blackfriday' | 'noel') => {
-    if (sampleType === 'cotonou') {
+  const handleLoadSample = (sampleType: 'cotonou' | 'blackfriday' | 'noel' | 'portfolio') => {
+    if (sampleType === 'portfolio') {
+      setBrand('Gandxo Tech');
+      setTarget('les entrepreneurs et créateurs');
+      setBenefit('lancer leur plateforme web moderne en 7 jours');
+      setEventDate('leur projet 2026');
+      setDeadline('ce mois-ci');
+      setFear('perdre du temps avec du code lent ou des bugs');
+      setDifferentiator('accompagnement direct sur WhatsApp et devis gratuit');
+    } else if (sampleType === 'cotonou') {
       setBrand('Minuit Doré');
       setTarget('les femmes de Cotonou et Calavi');
       setBenefit('trouver leur robe de soirée étincelante en 1 clic');
@@ -64,76 +72,76 @@ export function CopywritingWizardModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-[#101015] border border-neutral-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-[#101015] border border-neutral-800 rounded-xl sm:rounded-2xl w-full max-w-2xl max-h-[92vh] overflow-y-auto shadow-2xl flex flex-col">
         {/* Header */}
-        <div className="p-6 border-b border-neutral-800/80 flex items-center justify-between sticky top-0 bg-[#101015]/95 backdrop-blur-sm z-10">
+        <div className="p-4 sm:p-6 border-b border-neutral-800/80 flex items-center justify-between sticky top-0 bg-[#101015]/95 backdrop-blur-sm z-10 gap-3">
           <div>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#e8c98d]" />
-              <span>La Formule en 10 Minutes</span>
+            <h2 className="text-base sm:text-xl font-bold text-white flex items-center gap-2">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#e8c98d]" />
+              <span>Générateur : Formule en 5 Questions</span>
             </h2>
-            <p className="text-xs text-neutral-400 mt-1">
-              Répondez aux 5 questions fondamentales pour obtenir un texte percutant sans flou.
+            <p className="text-[11px] sm:text-xs text-neutral-400 mt-0.5 sm:mt-1">
+              Répondez à quelques questions simples pour générer un texte clair qui donne envie d’acheter.
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-400 hover:text-white rounded-lg hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="p-2 text-neutral-400 hover:text-white rounded-lg hover:bg-neutral-800 transition-colors cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-5">
+        <div className="p-3 sm:p-6 space-y-4">
           {/* Presets rapides */}
-          <div className="flex flex-wrap items-center gap-2 pb-2 border-b border-neutral-800/50">
-            <span className="text-xs text-neutral-400">Exemples pré-remplis :</span>
+          <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-neutral-800/50 text-xs">
+            <span className="text-neutral-400 text-[11px]">Exemples :</span>
+            <button
+              onClick={() => handleLoadSample('portfolio')}
+              className="px-2.5 py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-md transition-colors cursor-pointer text-[11px]"
+            >
+              💼 Portfolio Pro
+            </button>
             <button
               onClick={() => handleLoadSample('cotonou')}
-              className="text-xs px-2.5 py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-md transition-colors cursor-pointer"
+              className="px-2.5 py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-md transition-colors cursor-pointer text-[11px]"
             >
-              Minuit Doré (Cotonou)
+              👗 Minuit Doré
             </button>
             <button
               onClick={() => handleLoadSample('blackfriday')}
-              className="text-xs px-2.5 py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-md transition-colors cursor-pointer"
+              className="px-2.5 py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-md transition-colors cursor-pointer text-[11px]"
             >
-              Black Friday Tech
-            </button>
-            <button
-              onClick={() => handleLoadSample('noel')}
-              className="text-xs px-2.5 py-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-md transition-colors cursor-pointer"
-            >
-              Semaine Gratitude
+              ⚡ Black Friday
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-semibold text-neutral-300 mb-1">
-                1. Votre Marque / Projet
+                1. Votre Marque ou Nom
               </label>
               <input
                 type="text"
                 value={brand}
                 onChange={e => setBrand(e.target.value)}
-                placeholder="Ex. Minuit Doré, Gandxo…"
-                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
+                placeholder="Ex. Gandxo Tech, Minuit Doré…"
+                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-neutral-300 mb-1">
-                2. Qui achète ? (Précis)
+                2. Qui achète ? (Votre cible)
               </label>
               <input
                 type="text"
                 value={target}
                 onChange={e => setTarget(e.target.value)}
-                placeholder="Ex. Les femmes de Cotonou, parents à Fidjrossè…"
-                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
+                placeholder="Ex. Les créateurs de Cotonou, parents…"
+                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
               />
             </div>
 
@@ -145,8 +153,8 @@ export function CopywritingWizardModal({
                 type="text"
                 value={benefit}
                 onChange={e => setBenefit(e.target.value)}
-                placeholder="Ex. trouver leur look complet en un clic…"
-                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
+                placeholder="Ex. trouver leur look en un clic…"
+                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
               />
             </div>
 
@@ -158,81 +166,78 @@ export function CopywritingWizardModal({
                 type="text"
                 value={fear}
                 onChange={e => setFear(e.target.value)}
-                placeholder="Ex. que la livraison arrive après la fête…"
-                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
+                placeholder="Ex. recevoir en retard, mauvaise taille…"
+                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-neutral-300 mb-1">
-                5. Événement & Date qui compte
+                5. Événement ou Moment clé
               </label>
               <input
                 type="text"
                 value={eventDate}
                 onChange={e => setEventDate(e.target.value)}
-                placeholder="Ex. Réveillon 31 Décembre, Black Friday…"
-                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
+                placeholder="Ex. Réveillon 31 Décembre, ce mois-ci…"
+                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-neutral-300 mb-1">
-                6. Date limite pour être livré à temps
+                6. Date limite de commande
               </label>
               <input
                 type="text"
                 value={deadline}
                 onChange={e => setDeadline(e.target.value)}
-                placeholder="Ex. avant le 29 décembre, ce soir 23h59…"
-                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
+                placeholder="Ex. avant le 29 décembre, ce soir…"
+                className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
               />
             </div>
           </div>
 
           <div>
             <label className="block text-xs font-semibold text-neutral-300 mb-1">
-              7. Qu'est-ce qui vous rend différent / crédible ?
+              7. Ce qui vous rend différent / crédible
             </label>
             <input
               type="text"
               value={differentiator}
               onChange={e => setDifferentiator(e.target.value)}
-              placeholder="Ex. testé devant le livreur, dès 6 900 FCFA, garantie 12 mois…"
-              className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
+              placeholder="Ex. testé devant le livreur, dès 6 900 FCFA, SAV local…"
+              className="w-full px-3 py-2 bg-[#17171f] border border-neutral-800 rounded-lg text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#e8c98d]"
             />
           </div>
 
           {/* Résultat Promesse Box */}
-          <div className="bg-[#14141c] border border-[#e8c98d]/30 rounded-xl p-4 space-y-2">
+          <div className="bg-[#14141c] border border-[#e8c98d]/30 rounded-xl p-3 sm:p-4 space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#e8c98d] uppercase tracking-wider">
-                Votre Phrase-Promesse Générée
-              </span>
-              <span className="text-[11px] text-neutral-400">
-                Formule : Promesse + Preuve + Urgence
+              <span className="text-[11px] font-semibold text-[#e8c98d] uppercase tracking-wider">
+                Votre Phrase-Promesse Finale
               </span>
             </div>
-            <p className="text-sm font-medium text-white leading-relaxed">
+            <p className="text-xs sm:text-sm font-medium text-white leading-relaxed">
               « {generatedPromise} »
             </p>
           </div>
         </div>
 
         {/* Footer actions */}
-        <div className="p-6 border-t border-neutral-800 bg-[#101015] flex items-center justify-end gap-3 sticky bottom-0">
+        <div className="p-3 sm:p-6 border-t border-neutral-800 bg-[#101015] flex flex-col sm:flex-row items-center justify-end gap-2 sm:gap-3 sticky bottom-0">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-medium text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="w-full sm:w-auto px-4 py-2 text-xs font-medium text-neutral-300 hover:text-white rounded-lg hover:bg-neutral-800 transition-colors cursor-pointer text-center"
           >
-            Annuler
+            Fermer
           </button>
           <button
             onClick={handleApply}
-            className="px-5 py-2.5 text-xs font-semibold text-neutral-950 bg-[#e8c98d] hover:bg-[#d8b97d] rounded-lg transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-[#e8c98d]/20"
+            className="w-full sm:w-auto px-5 py-2.5 text-xs font-semibold text-neutral-950 bg-[#e8c98d] hover:bg-[#d8b97d] rounded-lg transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#e8c98d]/20"
           >
             <Check className="w-4 h-4" />
-            <span>Injecter dans le Studio Vidéo</span>
+            <span>Mettre dans le Studio</span>
           </button>
         </div>
       </div>
